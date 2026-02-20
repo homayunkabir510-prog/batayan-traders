@@ -1,6 +1,6 @@
 name: AI Content Update
 on:
-workflow_dispatch:
+  workflow_dispatch:
   repository_dispatch:
     types: [update-website]
 
@@ -11,11 +11,11 @@ jobs:
       - uses: actions/checkout@v3
       - name: Update HTML
         run: |
-          echo "${{ github.event.client_payload.code }}" > index.html
+          echo "Developed by: MD HUMAYUN KABIR" >> index.html
           git config user.name "Gemini AI"
           git config user.email "ai@gemini.com"
           git add index.html
-          git commit -m "Updated via Gemini AI"
+          git commit -m "Added developer name"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
