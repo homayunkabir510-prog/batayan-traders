@@ -1,0 +1,20 @@
+name: AI Content Update
+on:
+  repository_dispatch:
+    types: [update-website]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update HTML
+        run: |
+          echo "${{ github.event.client_payload.code }}" > index.html
+          git config user.name "Gemini AI"
+          git config user.email "ai@gemini.com"
+          git add index.html
+          git commit -m "Updated via Gemini AI"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
