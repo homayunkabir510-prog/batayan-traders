@@ -1,5 +1,6 @@
 name: AI Content Update
 on:
+workflow_dispatch:
   repository_dispatch:
     types: [update-website]
 
