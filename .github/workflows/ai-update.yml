@@ -1,21 +1,22 @@
 name: AI Content Update
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [update-website]
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Update HTML
+      - name: Force Update Social Links
         run: |
-          echo "Developed by: MD HUMAYUN KABIR" >> index.html
+          # এটি আপনার ফাইলের সব ফেসবুক লিঙ্ককে আপনার পেজের লিঙ্কে বদলে দেবে
+          sed -i 's|href="https://facebook.com[^"]*"|href="https://web.facebook.com/BatayanTraders"|g' index.html
+          sed -i 's|href="http://facebook.com[^"]*"|href="https://web.facebook.com/BatayanTraders"|g' index.html
+          
           git config user.name "Gemini AI"
           git config user.email "ai@gemini.com"
           git add index.html
-          git commit -m "Added developer name"
+          git commit -m "Fixed Facebook Link"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
